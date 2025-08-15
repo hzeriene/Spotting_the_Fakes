@@ -85,6 +85,56 @@ File Descriptions:
 |resnet50_on_wilddeepfake.ipynb| Applies ResNet-50 to the more challenging WildDeepfake dataset. Designed to show how the model handles real-world deepfake videos, with varying quality and noise conditions.|
 |cinvnext_tiny_wilddeepfake.ipynb | Focuses on ConvNeXt-Tiny (a modern, efficient CNN architecture) applied to the WildDeepfake dataset. Likely documents progressive unfreezing strategies, training performance, and any resulting accuracy improvements.|---
 
+
+##  Setup & Usage
+
+1. *Clone the repository*
+    bash
+    git clone https://github.com/hzeriene/Spotting_the_Fakes.git
+    cd Spotting_the_Fakes
+    
+
+2. *Install Dependencies*
+    bash
+    pip install -r requirements.txt
+   
+
+3. *Token Setup*
+   The code requires access to datasets from Kaggle and Hugging Face that need authentication tokens:
+
+      Kaggle Token:
+      - Go to your Kaggle account settings and create a new API token
+      - Download the `kaggle.json` file and place it in `~/.kaggle/` directory
+      - Or set up Kaggle API credentials as environment variables
+      
+      Hugging Face Token:
+      - Sign up at [Hugging Face](https://huggingface.co)
+      - Generate an access token at: https://huggingface.co/settings/tokens
+      - Create a `.env` file in the root of the project:
+        ```
+        HF_TOKEN=your_huggingface_token_here
+        ```
+      
+      In each notebook file, update this section:
+      ```python
+      # Replace "your_own_huggingface_token" with your actual Hugging Face access token
+      # Get one at: https://huggingface.co/settings/tokens
+      myTtoken = "your_own_huggingface_token"
+      ```
+5. *Run Training or Evaluation*
+    - Open the appropriate notebook (e.g., cinvnext_tiny_wilddeepfake.ipynb) and execute the cells.
+    - Ensure any dataset paths or configurations are correctly set—typically, there will be variables like DATA_DIR to point to downloaded dataset location.
+
+6. *Hyperparameters*
+
+     batch_size = 32
+     learning_rate = 1e-4
+     epochs = 10
+     weight_decay = 1e-5
+     max_samples_training = 4000
+     max_smaples_test = 2000
+     
+
 ## Key Insights
 - **Architecture matters**: Modern, well-designed smaller models can outperform larger ones on complex datasets.  
 - **Dataset complexity is critical**: A model that excels on clean datasets may fail on real-world noisy data.  
